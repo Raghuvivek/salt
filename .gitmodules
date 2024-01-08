@@ -1,0 +1,3 @@
+[submodule "common/multitab/tab-extension"]
+	path = common/multitab/tab-extension
+	url = https://github.bus.zalan.do/whit-berlin/kiosk-tabs-extension.git
