@@ -1,0 +1,23 @@
+name: Update Debian VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-debian:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Copy code to Debian VM
+        run: |
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          scp -r . root@10.20.52.103:/ansible
+          ssh user@debian-vm 'cd /path/to/destination && ./update_script.sh'
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
